@@ -1,4 +1,5 @@
 *.log
 *.out
+*.password
 *.private
 *.DS_Store
