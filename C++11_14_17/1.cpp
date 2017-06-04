@@ -28,7 +28,7 @@ namespace CPP14LanguageFeatures {
 
  		typename std::vector<const T*>::iterator beginCPP03() const
  		{
- 			return std::begin(vec)
+ 			return std::begin(vec);
  		}
  		auto beginCPP11() const -> decltype(std::begin(vec))
  		{
@@ -57,10 +57,36 @@ namespace CPP14LanguageFeatures {
 
 
 
+
+ 	struct record
+ 	{
+ 		std::string name;
+ 		int id;
+ 	};
+
+ 	auto find_id(const std::vector<record> &people, const std::string &name)
+ 	{
+ 		auto match_record = [&name](const record& r)
+ 		{
+ 			return r.name == name;
+ 		};
+
+ 		auto match_records = find_if(people.begin(), people.end(), match_record);
+
+ 		if(match_records == people.end())
+ 			return -1;
+ 		else
+ 			return match_records->id;
+ 	}
  	
 }
 
 
 int main(){
 	std::cout << "Testing c++14 an c++11 this sunday :)" << std::endl;
+	std::vector<CPP14LanguageFeatures::record> roster = { {"mark",1},
+                                 {"bill",2},
+                                 {"ted",3}};
+	std::cout << find_id(roster,"bill") << std::endl;
+	std::cout << find_id(roster,"ron") << std::endl;
 }
