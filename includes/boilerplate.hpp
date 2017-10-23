@@ -1,5 +1,11 @@
 #include <iostream>
 #include <map>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <type_traits>
+#include <algorithm>
+#include <functional>
 
 class Person{
 private:

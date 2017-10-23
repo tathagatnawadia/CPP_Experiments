@@ -22,6 +22,7 @@ int main() {
     Person *son = new Person("Ben", "**********", "**********@icloud.com");
     son->addRelation("father", new Person("Ross Geller", "**********", "********@gmail.com") );
     write("son.bak", *son);
+    std::cout << *son << std::endl;
 
     Person backuprecovery;
     read("son.bak", backuprecovery);
