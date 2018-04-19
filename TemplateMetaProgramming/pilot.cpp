@@ -220,6 +220,16 @@ struct MetaType
 	// virtual void Delete(void* v) const = 0;
 };
 
+class Robot {
+public:
+	Robot() {}
+	~Robot() {}
+private:
+	std::string farmName;
+	bool isActive;
+	int betallion;
+};
+
 struct IntMetaType : public MetaType
 {
 	virtual const char* Name() const { return "int"; }
@@ -232,8 +242,16 @@ struct CharMetaType : public MetaType
 	virtual size_t SizeOf() const { return sizeof(char*); }
 }char_MetaType;
 
+struct RobotMetaType : public MetaType 
+{
+	virtual const char* Name() const { return "Robot"; }
+	virtual size_t SizeOf() const { return sizeof(Robot); }
+}robot_MetaType;
+
 const MetaType& GetMetaType(int) { return int_MetaType; }
 const MetaType& GetMetaType(const char*) { return char_MetaType; }
+const MetaType& GetMetaType(const Robot) { return robot_MetaType; }
+const MetaType& GetMetaType(const Robot*) { return robot_MetaType; }
 
 void t_typeInfo()
 {
@@ -243,9 +261,13 @@ void t_typeInfo()
 
 	int a = 2;
 	const char* b = "Nawadia";
+	Robot* c;
+	Robot d;
 
-	std::cout << "name : " << GetMetaType(a).Name() << std::endl;
-	std::cout << "name : " << GetMetaType(b).Name() << std::endl;
+	std::cout << "name : " << GetMetaType(a).Name() << "\t size : " << GetMetaType(a).SizeOf() << std::endl;
+	std::cout << "name : " << GetMetaType(b).Name() << "\t size : " << GetMetaType(b).SizeOf() << std::endl;
+	std::cout << "name : " << GetMetaType(c).Name() << "\t size : " << GetMetaType(c).SizeOf() << std::endl;
+	std::cout << "name : " << GetMetaType(d).Name() << "\t size : " << GetMetaType(d).SizeOf() << std::endl;
 
 }
 
